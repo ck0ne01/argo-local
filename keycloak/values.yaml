@@ -176,17 +176,3 @@ keycloak:
         labels: {}
         ## @param backup.cronjob.annotations Set the cronjob annotations
         annotations: {}
-        storage:
-          ## @param backup.cronjob.storage.existingClaim Provide an existing `PersistentVolumeClaim` (only when `architecture=standalone`)
-          ## If defined, PVC must be created manually before volume will be bound
-          ##
-          #existingClaim: "keycloak-dev-poc-postgresql-pgdumpall-1"
-          existingClaim: ""
-          ## @param backup.cronjob.storage.resourcePolicy Setting it to "keep" to avoid removing PVCs during a helm delete operation. Leaving it empty will delete PVCs after the chart deleted
-          ##
-          resourcePolicy: "keep"
-          accessModes:
-            - ReadWriteOnce
-          size: 8Gi
-          annotations: {}
-          mountPath: /backup/pgdump
