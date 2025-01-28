@@ -85,11 +85,17 @@ keycloak:
   service:
     ## @param service.type Kubernetes service type
     ##
-    type: NodePort
+    type: ClusterIP
     ## @param service.http.enabled Enable http port on service
     ##
     http:
-      enabled: false
+      enabled: true
+    ## @param service.ports.http Keycloak service HTTP port
+    ## @param service.ports.https Keycloak service HTTPS port
+    ##
+    ports:
+      http: 80
+      https: 443
 
   serviceAccount:
     ## @param serviceAccount.automountServiceAccountToken Auto-mount the service account token in the pod
