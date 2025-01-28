@@ -11,25 +11,6 @@ keycloak:
   ## @param image.pullSecrets Specify docker-registry secret names as an array
   ## @param image.debug Specify if debug logs should be enabled
   ##
-  image:
-    registry: registry.bare.pandrosion.org
-    repository: edp/service/redqueen/iam-keycloak-image/keycloak
-    tag: 25.0.6-2
-    digest: ""
-    ## Specify a imagePullPolicy
-    ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
-    ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
-    ##
-    pullPolicy: IfNotPresent
-    ## Optionally specify an array of imagePullSecrets.
-    ## Secrets must be manually created in the namespace.
-    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-    ## Example:
-    ## pullSecrets:
-    ##   - myRegistryKeySecretName
-    ##
-    pullSecrets:
-      - gitlab-registry-credentials
   ## Keycloak authentication parameters
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/keycloak#admin-credentials
   ##
@@ -40,12 +21,6 @@ keycloak:
     ## @param auth.adminPassword Keycloak administrator password for the new user
     ##
     adminPassword: "admin"
-    ## @param auth.existingSecret Existing secret containing Keycloak admin password
-    ##
-    existingSecret: "admin-password"
-    ## @param auth.passwordSecretKey Key where the Keycloak admin password is being stored inside the existing secret.
-    ##
-    passwordSecretKey: "password"
 
   ## HTTPS settings
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/keycloak#tls-encryption
