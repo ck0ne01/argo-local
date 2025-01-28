@@ -41,7 +41,7 @@ keycloak:
     ## @param tls.usePem Use PEM certificates as input instead of PKS12/JKS stores
     ## If "true", the Keycloak chart will look for the files keycloak.key and keycloak.crt inside the secret provided with 'existingSecret'.
     ##
-    usePem: true
+    usePem: false
   ## @param production Run Keycloak in production mode. TLS configuration is required except when using proxy=edge.
   ##
   production: false
@@ -73,7 +73,7 @@ keycloak:
 
   ## @param replicaCount Number of Keycloak replicas to deploy
   ##
-  replicaCount: 2
+  replicaCount: 1
 
   ## @param topologySpreadConstraints Topology Spread Constraints for pod assignment spread across your cluster among failure-domains. Evaluated as a template
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#spread-constraints-for-pods
@@ -131,48 +131,10 @@ keycloak:
   ## @param postgresql.architecture PostgreSQL architecture (`standalone` or `replication`)
   ##
   postgresql:
-    primary:
-      resourcesPreset: "small"
     enabled: true
     auth:
       postgresPassword: "password"
       username: bn_keycloak
       password: "password"
       database: bitnami_keycloak
-      existingSecret: "database-password"
-    architecture: replication
-    backup:
-      ## @param backup.enabled Enable the logical dump of the database "regularly"
-      enabled: true
-      cronjob:
-        schedule: "0 5 * * *"
-        #schedule: "1 * * * *"
-        concurrencyPolicy: Forbid
-        failedJobsHistoryLimit: 1
-        successfulJobsHistoryLimit: 3
-        restartPolicy: OnFailure
-        podSecurityContext:
-          enabled: true
-          fsGroup: 1001
-        containerSecurityContext:
-          runAsUser: 0
-          runAsGroup: 0
-          runAsNonRoot: false
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
-          seccompProfile:
-            type: RuntimeDefault
-          capabilities:
-            drop:
-              - ALL
-        ## @param backup.cronjob.command Set backup container's command to run
-        command:
-          - /bin/sh
-          - -c
-          #- "sleep 100000"
-          - "pg_dumpall --clean --if-exists --load-via-partition-root --quote-all-identifiers --no-password --file=${PGDUMP_DIR}/pg_dumpall-$(date '+%Y-%m-%d-%H-%M').pgdump && ls -al /backup/pgdump"
-
-        ## @param backup.cronjob.labels Set the cronjob labels
-        labels: {}
-        ## @param backup.cronjob.annotations Set the cronjob annotations
-        annotations: {}
+    architecture: standalone
