@@ -169,9 +169,9 @@ keycloak:
       resourcesPreset: "small"
     enabled: true
     auth:
-      postgresPassword: ""
+      postgresPassword: "password"
       username: bn_keycloak
-      password: ""
+      password: "password"
       database: bitnami_keycloak
       existingSecret: "database-password"
     architecture: replication
