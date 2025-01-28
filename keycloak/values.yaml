@@ -69,7 +69,7 @@ keycloak:
     usePem: true
   ## @param production Run Keycloak in production mode. TLS configuration is required except when using proxy=edge.
   ##
-  production: true
+  production: false
   ## @param proxy reverse Proxy mode edge, reencrypt, passthrough or none
   ## ref: https://www.keycloak.org/server/reverseproxy
   ##
