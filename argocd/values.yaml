@@ -1,0 +1,12 @@
+configs:
+  cm:
+    create: true
+    admin.enabled: true
+    users.session.duration: "4h"
+    kustomize.buildOptions: --enable-helm
+    application.resourceTrackingMethod: annotation+label
+  params:
+    create: true
+    server:
+      insecure: false
+    application.namespaces: tenant-*
